@@ -1,14 +1,25 @@
-import { StyleSheet } from 'react-native';
-
-import EditScreenInfo from '@/src/components/EditScreenInfo';
+// src/screens/TabOneScreen.tsx
+import { FlatList, StyleSheet } from 'react-native';
 import { Text, View } from '@/src/components/Themed';
+import ProductListItem from '@/src/components/ProductListItem';
+import { useProducts } from '../../Hooks/useProduct'; // Correct the import path if needed
 
 export default function TabOneScreen() {
+  const { products, loading, error } = useProducts(); // Correct usage of the hook
+
+  if (loading) return <Text>Loading...</Text>;
+  if (error) return <Text>{error}</Text>;
+
   return (
-    <View className="justify-center flex-1 text-center bg-red-200">
-      <Text className="text-lg text-center text-bold">Tab One 1</Text>
-      {/* <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-      <EditScreenInfo path="app/(tabs)/index.tsx" /> */}
+    <View style={styles.container}>
+      <FlatList
+        data={products}
+        renderItem={({ item }) => <ProductListItem product={item} />}
+        numColumns={2}
+        contentContainerStyle={{ gap: 10, padding: 10 }}
+        columnWrapperStyle={{ gap: 10 }}
+        keyExtractor={(item) => item.id}
+      />
     </View>
   );
 }
@@ -16,16 +27,7 @@ export default function TabOneScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  title: {
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
-  separator: {
-    marginVertical: 30,
-    height: 1,
-    width: '80%',
+    padding: 10,
+    backgroundColor: '#fff', // Adjust as per your design
   },
 });
