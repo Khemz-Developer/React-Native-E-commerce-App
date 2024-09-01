@@ -186,11 +186,12 @@ import {
   ScrollView,
 } from 'react-native';
 import React, { useEffect, useState } from 'react';
-import { useLocalSearchParams } from 'expo-router';
+import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useProducts } from '@/src/Hooks/useProduct';
 import { Product } from '../../../Types/types';
 import { ShoesSize } from '../../../Types/types';
 import {  useCart } from '../../../providers/CartProvider'
+import { useRoute } from '@react-navigation/native';
 
 const ProductDetailsScreen = () => {
   const { id } = useLocalSearchParams<{ id: string }>();
@@ -199,6 +200,7 @@ const ProductDetailsScreen = () => {
   const [selectedSize, setSelectedSize] = useState<ShoesSize | null>('8');
 
   const { addItem } = useCart();
+  const router = useRouter();
   
   const sizes: ShoesSize[] = ['8', '9', '10', '11'];
 
@@ -226,6 +228,7 @@ const ProductDetailsScreen = () => {
       return;
     }
     addItem(product, selectedSize);
+    router.push('/cart');
   }
   return (
     <ScrollView contentContainerStyle={styles.container}>

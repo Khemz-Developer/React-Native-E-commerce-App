@@ -1,16 +1,16 @@
 // types.ts
-export interface Price {
+export type Price ={
     amount: string;
     currency: string;
 }
   
-export interface Product {
+export type Product = {
     id: string;
     SKU: string;
     name: string;
     brandName: string | null;
     mainImage: string;
-    price: Price;
+    price:Price;
     sizes: string[];
     stockStatus: string;
     colour: string;
