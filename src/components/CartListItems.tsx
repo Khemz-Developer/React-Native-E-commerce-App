@@ -10,7 +10,7 @@ type CartListItemsProps = {
 
 const CartListItems = ({ CartItem }: CartListItemsProps) => {
   const { amount, currency } = CartItem.product.price;
-  const { updateQuantity } = useCart();
+  const { updateQuantity, removeItem } = useCart();
 
   return (
     <View className="flex-row items-center justify-between p-2 border border-gray-300 rounded-lg">
@@ -20,7 +20,9 @@ const CartListItems = ({ CartItem }: CartListItemsProps) => {
         resizeMode="contain"
       />
       <View className="flex-1">
-        <Text className="mb-1 text-base font-bold">{CartItem.product.name}</Text>
+        <Text className="mb-1 text-base font-bold">
+          {CartItem.product.name}
+        </Text>
         <View className="flex-row gap-1">
           <View className="flex-1">
             <Text className="mb-1 text-sm font-semibold">
@@ -33,24 +35,37 @@ const CartListItems = ({ CartItem }: CartListItemsProps) => {
           </View>
         </View>
       </View>
-      <View className="flex-row items-center gap-2 my-2">
-        <FontAwesome
-          onPress={() => updateQuantity(CartItem.id, -1)}
-          name="minus"
-          color="gray"
-          className="p-1"
-          size={15}
-        />
-        <Text className="text-lg font-bold">{CartItem.quantity}</Text>
-        <FontAwesome 
-          onPress={() => updateQuantity(CartItem.id, 1)}
-          name="plus"
-          color="gray"
-          className="p-1 "
-          size={15}
-          
-        />
+      <View className="pr-5">
+        <View className="flex-row items-center gap-2 my-2">
+          <FontAwesome
+            onPress={() => updateQuantity(CartItem.id, -1)}
+            name="minus"
+            color="#6b7280"
+            className="p-1"
+            size={14}
+          />
+          <Text className="text-lg font-bold text-gray-600">
+            {CartItem.quantity}
+          </Text>
+          <FontAwesome
+            onPress={() => updateQuantity(CartItem.id, 1)}
+            name="plus"
+            color="#6b7280"
+            className="p-1 "
+            size={14}
+          />
+        </View>
+        
       </View>
+      <View className="mt-2">
+          <FontAwesome
+            name="trash"
+            size={20}
+            color="black"
+            onPress={() => removeItem(CartItem.id)}
+            className="absolute top-1 right-1"
+          />
+        </View>
     </View>
   );
 };
