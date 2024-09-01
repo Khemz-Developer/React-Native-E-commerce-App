@@ -188,8 +188,9 @@ import {
 import React, { useEffect, useState } from 'react';
 import { useLocalSearchParams } from 'expo-router';
 import { useProducts } from '@/src/Hooks/useProduct';
-import { Product } from '@/src/Types/types';
-import { ShoesSize } from '@/src/Types/types';
+import { Product } from '../../../Types/types';
+import { ShoesSize } from '../../../Types/types';
+import {  useCart } from '../../../providers/CartProvider'
 
 const ProductDetailsScreen = () => {
   const { id } = useLocalSearchParams<{ id: string }>();
@@ -197,6 +198,8 @@ const ProductDetailsScreen = () => {
   const [product, setProduct] = useState<Product | null>(null);
   const [selectedSize, setSelectedSize] = useState<ShoesSize | null>('8');
 
+  const { addItem } = useCart();
+  
   const sizes: ShoesSize[] = ['8', '9', '10', '11'];
 
   useEffect(() => {
@@ -218,6 +221,12 @@ const ProductDetailsScreen = () => {
     );
   }
 
+  const addToCart = () => {
+    if(!product){
+      return;
+    }
+    addItem(product, selectedSize);
+  }
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <Image
@@ -262,9 +271,8 @@ const ProductDetailsScreen = () => {
         ))}
       </View>
       <Button
-        className="p-10 m-10 text-left"
         title="Add to Cart"
-        onPress={() => console.log('Add to Cart')}
+        onPress={addToCart}
       />
     </ScrollView>
   );
