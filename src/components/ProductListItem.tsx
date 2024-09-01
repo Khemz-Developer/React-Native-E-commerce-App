@@ -1,5 +1,4 @@
-
-import { View, Text, Image, StyleSheet, Pressable } from 'react-native';
+import { View, Text, Image, Pressable } from 'react-native';
 import React from 'react';
 import { Product } from '../Types/types'; 
 import { Link } from 'expo-router';
@@ -13,52 +12,18 @@ interface ProductListItemProps {
 const ProductListItem: React.FC<ProductListItemProps> = ({ product }) => {
   return (
     <Link href={`/menu/${product.id}`} asChild>
-    <Pressable style={styles.card}>
-      <Image
-        style={styles.image}
-        resizeMode="contain"
-        source={{ uri: product.mainImage || defaultImage }}
-      />
-      <Text style={styles.name}>{product.name}</Text>
-      <Text style={styles.brand}>{product.brandName || 'Unknown Brand'}</Text>
-      <Text style={styles.price}>
-        {product.price.amount} {product.price.currency}
-      </Text>
-    </Pressable>
+      <Pressable className="flex-1 items-center bg-gray-100 rounded-lg p-3 max-w-[48%] m-1 shadow-md">
+        <Image
+          className="w-full rounded-md aspect-square"
+          resizeMode="contain"
+          source={{ uri: product.mainImage || defaultImage }}
+        />
+        <Text className="mt-2 text-sm font-bold text-center">{product.name}</Text>
+        <Text className="my-1 text-xs text-gray-600">{product.brandName || 'Unknown Brand'}</Text>
+        <Text className="text-lg font-semibold text-black">{product.price.amount} {product.price.currency}</Text>
+      </Pressable>
     </Link>
   );
 };
 
 export default ProductListItem;
-
-const styles = StyleSheet.create({
-  card: {
-    flex: 1,
-    backgroundColor: '#f9f9f9',
-    borderRadius: 10,
-    padding: 10,
-    alignItems: 'center',
-    maxWidth: '50%',
-  },
-  image: {
-    width: '100%',
-    aspectRatio: 1,
-    borderRadius: 8,
-  },
-  name: {
-    marginTop: 8,
-    fontSize: 14,
-    fontWeight: 'bold',
-    textAlign: 'center',
-  },
-  brand: {
-    fontSize: 12,
-    color: '#555',
-    marginVertical: 4,
-  },
-  price: {
-    fontSize: 16,
-    fontWeight: 'bold',
-    color: '#000',
-  },
-});

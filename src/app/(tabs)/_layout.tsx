@@ -2,12 +2,10 @@ import React from 'react';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { Link, Tabs } from 'expo-router';
 import { Pressable } from 'react-native';
-
 import Colors from '@/src/constants/Colors';
 import { useColorScheme } from '@/src/components/useColorScheme';
 import { useClientOnlyValue } from '@/src/components/useClientOnlyValue';
 import Entypo from '@expo/vector-icons/Entypo';
-
 
 // You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
 function TabBarIcon(props: {
@@ -34,7 +32,7 @@ export default function TabLayout() {
         options={{
           title: 'Menu',
           headerShown: false,
-          tabBarIcon: ({ color }) => <Entypo name="home" size={24} color="black" />,
+          tabBarIcon: ({ color }) => <Entypo name="home" size={24} color={color} />,
           headerRight: () => (
             <Link href="/modal" asChild>
               <Pressable>
@@ -55,7 +53,7 @@ export default function TabLayout() {
         name="two"
         options={{
           title: 'Orders',
-          tabBarIcon: ({ color }) => <Entypo name="add-to-list" size={24} color="black" />,
+          tabBarIcon: ({ color }) => <Entypo name="add-to-list" size={24} color={color} />,
         }}
       />
     </Tabs>

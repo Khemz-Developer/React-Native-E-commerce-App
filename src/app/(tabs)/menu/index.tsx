@@ -11,13 +11,13 @@ export default function TabOneScreen() {
   if (error) return <Text>{error}</Text>;
 
   return (
-    <View style={styles.container}>
+    <View className='flex-1 p-2.5 bg-white '>
       <FlatList
         data={products}
         renderItem={({ item }) => <ProductListItem product={item} />}
         numColumns={2}
-        contentContainerStyle={{ gap: 10, padding: 10 }}
-        columnWrapperStyle={{ gap: 10 }}
+        contentContainerStyle={{ gap: 5, padding: 5 }}
+        columnWrapperStyle={{ gap: 5 }}
         keyExtractor={(item) => item.id}
       />
     </View>

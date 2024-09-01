@@ -1,5 +1,6 @@
 import { createContext , PropsWithChildren, useContext, useMemo, useState } from "react";
 import { CartItem, Product } from "../Types/types";
+import { Alert } from "react-native";
 
 type CartType ={
     items: CartItem[],
@@ -43,6 +44,7 @@ const CartProvider = ({ children }:PropsWithChildren) => {
             quantity: 1,
         };
         setItems([newCartItem, ...items]); 
+        Alert.alert("Success","Item added to cart");
     }
 
     console.log("items",items);
