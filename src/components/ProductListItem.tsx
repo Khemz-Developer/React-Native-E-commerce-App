@@ -1,7 +1,8 @@
-// src/components/ProductListItem.tsx
-import { View, Text, Image, StyleSheet } from 'react-native';
+
+import { View, Text, Image, StyleSheet, Pressable } from 'react-native';
 import React from 'react';
-import { Product } from '@/src/types'; // Make sure the path is correct
+import { Product } from '../Types/types'; 
+import { Link } from 'expo-router';
 
 export const defaultImage = 'https://notjustdev-dummy.s3.us-east-2.amazonaws.com/food/peperoni.png';
 
@@ -11,7 +12,8 @@ interface ProductListItemProps {
 
 const ProductListItem: React.FC<ProductListItemProps> = ({ product }) => {
   return (
-    <View style={styles.card}>
+    <Link href={`/menu/${product.id}`} asChild>
+    <Pressable style={styles.card}>
       <Image
         style={styles.image}
         resizeMode="contain"
@@ -22,7 +24,8 @@ const ProductListItem: React.FC<ProductListItemProps> = ({ product }) => {
       <Text style={styles.price}>
         {product.price.amount} {product.price.currency}
       </Text>
-    </View>
+    </Pressable>
+    </Link>
   );
 };
 
@@ -32,9 +35,10 @@ const styles = StyleSheet.create({
   card: {
     flex: 1,
     backgroundColor: '#f9f9f9',
-    borderRadius: 8,
+    borderRadius: 10,
     padding: 10,
     alignItems: 'center',
+    maxWidth: '50%',
   },
   image: {
     width: '100%',

@@ -16,4 +16,13 @@ export interface Product {
     colour: string;
     description: string;
 }
-  
+
+export type ShoesSize = '8'|'9'|'10'|'11';
+
+export type CartItem = {
+    id: string;
+    product: Product;
+    product_id: number;
+    size: ShoesSize;
+    quantity: number;
+  };
