@@ -7,6 +7,7 @@ This is an e-commerce application task built with React Native and Expo.
 - Display a list of products
 - View product details
 - Add, update, and remove items in the cart
+- Display the total amount of items in the cart
 - Stylish and responsive UI
 
 ## Technologies Used
