@@ -1,6 +1,6 @@
 # React Native E-commerce Application
 
-This is an e-commerce application built with React Native and Expo. The app allows users to browse products, view product details, add items to the cart, and manage their cart.
+This is an e-commerce application task built with React Native and Expo. 
 
 ## Features
 
